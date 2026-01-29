@@ -37,7 +37,10 @@ public class MarketServiceImpl implements MarketService{
 
     @Override
     public Market saveEquity(Market equity) {
-        MarketEntity marketEntity = new MarketEntity(equity.getId(), equity.getEquity(), equity.getPrice());
+        MarketEntity marketEntity = new MarketEntity();
+        marketEntity.setId(null);
+        marketEntity.setEquity(equity.getEquity());
+        marketEntity.setPrice(equity.getPrice());
         return toModel(repository.save(marketEntity));
     }
 }
