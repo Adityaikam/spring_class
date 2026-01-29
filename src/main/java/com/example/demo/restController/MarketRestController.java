@@ -1,12 +1,10 @@
 package com.example.demo.restController;
 
-import com.example.demo.entity.Market;
-import com.example.demo.service.MarketService;
+import com.example.demo.model.Market;
 import com.example.demo.service.MarketServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -25,20 +23,17 @@ public class MarketRestController {
 
     @GetMapping("/equities")
     public ResponseEntity<List<Market>> getEquities() {
-        return ResponseEntity.ok(equities);
+        return ResponseEntity.ok(marketService.getAllEquities());
     }
 
     @GetMapping("/equity/{id}")
     public ResponseEntity<Market> getEquity(@PathVariable long id) {
-        if(id <= equities.size() &&  id > 0) {
-            return ResponseEntity.ok(equities.get((int) (id - 1)));
-        }
-        return ResponseEntity.noContent().build();
+            return ResponseEntity.ok(marketService.getEquityById(id));
     }
 
     @PostMapping("/addEquity")
     public ResponseEntity<Market> addEquity(@RequestBody Market equity) {
-        ResponseEntity.ok(equities.add(equity));
+        ResponseEntity.ok(marketService.saveEquity(equity));
         return null;
     }
 

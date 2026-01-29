@@ -1,6 +1,6 @@
 package com.example.demo.repo;
 
-import com.example.demo.entity.Market;
+import com.example.demo.model.Market;
 
 import java.util.List;
 
